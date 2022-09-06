@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.teTitle = new DevExpress.XtraEditors.TextEdit();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDocumentList = new System.Windows.Forms.DataGridView();
             this.clientNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,13 +42,12 @@
             this.labelNag = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.sbAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.sbEdit = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxClient = new System.Windows.Forms.ComboBox();
             this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clientBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.teTitle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
@@ -62,14 +61,14 @@
             this.teTitle.Size = new System.Drawing.Size(234, 20);
             this.teTitle.TabIndex = 0;
             // 
-            // dataGridView1
+            // dataGridViewDocumentList
             // 
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridViewDocumentList.AllowUserToDeleteRows = false;
+            this.dataGridViewDocumentList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewDocumentList.AutoGenerateColumns = false;
+            this.dataGridViewDocumentList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDocumentList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clientNumberDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.titleDataGridViewTextBoxColumn,
@@ -77,13 +76,14 @@
             this.editDateDataGridViewTextBoxColumn,
             this.priceNDataGridViewTextBoxColumn,
             this.priceBDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.documentBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 75);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(744, 198);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridViewDocumentList.DataSource = this.documentBindingSource;
+            this.dataGridViewDocumentList.Location = new System.Drawing.Point(12, 75);
+            this.dataGridViewDocumentList.Name = "dataGridViewDocumentList";
+            this.dataGridViewDocumentList.ReadOnly = true;
+            this.dataGridViewDocumentList.RowTemplate.Height = 25;
+            this.dataGridViewDocumentList.Size = new System.Drawing.Size(744, 198);
+            this.dataGridViewDocumentList.TabIndex = 2;
+            this.dataGridViewDocumentList.SelectionChanged += new System.EventHandler(this.dataGridViewDocumentList_SelectionChanged);
             // 
             // clientNumberDataGridViewTextBoxColumn
             // 
@@ -163,14 +163,6 @@
             this.sbAdd.Text = "Dodaj Dokument";
             this.sbAdd.Click += new System.EventHandler(this.sbAdd_Click);
             // 
-            // sbEdit
-            // 
-            this.sbEdit.Location = new System.Drawing.Point(622, 41);
-            this.sbEdit.Name = "sbEdit";
-            this.sbEdit.Size = new System.Drawing.Size(134, 23);
-            this.sbEdit.TabIndex = 6;
-            this.sbEdit.Text = "Edytuj Dokument";
-            // 
             // comboBoxClient
             // 
             this.comboBoxClient.FormattingEnabled = true;
@@ -198,18 +190,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 285);
             this.Controls.Add(this.comboBoxClient);
-            this.Controls.Add(this.sbEdit);
             this.Controls.Add(this.sbAdd);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelNag);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewDocumentList);
             this.Controls.Add(this.teTitle);
             this.MinimumSize = new System.Drawing.Size(2, 310);
             this.Name = "CreateDocument";
             this.Text = "Create_Document";
             this.Load += new System.EventHandler(this.CreateDocument_Load);
             ((System.ComponentModel.ISupportInitialize)(this.teTitle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clientBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
@@ -222,7 +213,7 @@
         #endregion
 
         private DevExpress.XtraEditors.TextEdit teTitle;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewDocumentList;
         private System.Windows.Forms.DataGridViewTextBoxColumn clientNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
@@ -234,7 +225,6 @@
         private DevExpress.XtraEditors.LabelControl labelNag;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton sbAdd;
-        private DevExpress.XtraEditors.SimpleButton sbEdit;
         private System.Windows.Forms.ComboBox comboBoxClient;
         private System.Windows.Forms.BindingSource clientBindingSource;
         private System.Windows.Forms.BindingSource itemsBindingSource;
