@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace ZadanieRekrutacyjneITC.Entities
 {
-    public class ZadRekContext : DbContext
+    public class DataBaseContext : DbContext
     {
         public DbSet<Document> Documents { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Log> Logs { get; set; }
-        public DbSet<Adress> Adresses { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(Properties.Settings.Default.LocalDb);
@@ -37,12 +36,7 @@ namespace ZadanieRekrutacyjneITC.Entities
             });
 
 
-            modelBuilder.Entity<Client>()
-                .HasOne(c => c.Adress)
-                .WithOne(a => a.Client)
-                .HasForeignKey<Adress>(a => a.ClientId);
-            modelBuilder.Entity<Client>().Property(wi => wi.Nip).IsRequired();
-                    ;
+     
 
             modelBuilder.Entity<Item>(eb =>
             {
@@ -53,14 +47,7 @@ namespace ZadanieRekrutacyjneITC.Entities
                 eb.Property(i => i.Name).HasMaxLength(50);
                 eb.Property(i => i.Count).HasPrecision(5,2);
             });
-            modelBuilder.Entity<Adress>(eb =>
-            {
-                eb.Property(a => a.Street).HasMaxLength(50);
-                eb.Property(a => a.City).HasMaxLength(50);
-                eb.Property(a => a.PostalCode).HasMaxLength(6);
-                eb.Property(a => a.Country).HasMaxLength(50);
-
-            });
+           
             modelBuilder.Entity<Log>(eb =>
             {
                 eb.Property(l => l.Date).HasDefaultValueSql("getutcdate()");

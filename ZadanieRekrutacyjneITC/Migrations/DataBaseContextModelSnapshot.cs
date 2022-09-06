@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZadanieRekrutacyjneITC.Entities;
 
@@ -11,11 +10,10 @@ using ZadanieRekrutacyjneITC.Entities;
 
 namespace ZadanieRekrutacyjneITC.Migrations
 {
-    [DbContext(typeof(ZadRekContext))]
-    [Migration("20220905154803_Init")]
-    partial class Init
+    [DbContext(typeof(DataBaseContext))]
+    partial class DataBaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,50 +22,18 @@ namespace ZadanieRekrutacyjneITC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Adress", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("City")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Country")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PostalCode")
-                        .HasMaxLength(6)
-                        .HasColumnType("nvarchar(6)");
-
-                    b.Property<string>("Street")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClientId")
-                        .IsUnique();
-
-                    b.ToTable("Adresses");
-                });
-
             modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Client", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nip")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -171,17 +137,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                     b.ToTable("Logs");
                 });
 
-            modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Adress", b =>
-                {
-                    b.HasOne("ZadanieRekrutacyjneITC.Entities.Client", "Client")
-                        .WithOne("Adress")
-                        .HasForeignKey("ZadanieRekrutacyjneITC.Entities.Adress", "ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Item", b =>
                 {
                     b.HasOne("ZadanieRekrutacyjneITC.Entities.Document", "Document")
@@ -191,11 +146,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                         .IsRequired();
 
                     b.Navigation("Document");
-                });
-
-            modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Client", b =>
-                {
-                    b.Navigation("Adress");
                 });
 
             modelBuilder.Entity("ZadanieRekrutacyjneITC.Entities.Document", b =>

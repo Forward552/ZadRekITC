@@ -13,9 +13,10 @@ namespace ZadanieRekrutacyjneITC.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Nip = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nip = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,28 +58,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Adresses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
-                    ClientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Adresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Adresses_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -102,12 +81,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Adresses_ClientId",
-                table: "Adresses",
-                column: "ClientId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Items_DocumentId",
                 table: "Items",
                 column: "DocumentId");
@@ -116,16 +89,13 @@ namespace ZadanieRekrutacyjneITC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Adresses");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
                 name: "Logs");
-
-            migrationBuilder.DropTable(
-                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Documents");
