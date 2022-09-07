@@ -24,7 +24,6 @@ namespace ZadanieRekrutacyjneITC.Entities
             //modelBuilder.Entity<Document>().Property(e => e.ClientNumber).IsRequired();
             modelBuilder.Entity<Document>(eb =>
             {
-
                 eb.Property(d => d.ClientNumber).IsRequired();
                 eb.Property(d => d.PriceN).HasPrecision(10, 2);
                 eb.Property(d => d.PriceB).HasPrecision(11, 2);
@@ -32,7 +31,7 @@ namespace ZadanieRekrutacyjneITC.Entities
                 eb.Property(d => d.Title).HasMaxLength(100);
                 eb.HasMany(d => d.Items)
                 .WithOne(i =>i.Document)
-                .HasForeignKey(d =>d.DocumentId);
+                .HasForeignKey(i =>i.DocumentId);
             });
 
 

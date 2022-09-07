@@ -42,22 +42,32 @@ namespace ZadanieRekrutacyjneITC.Windows
 
         private void sbAdd_Click(object sender, EventArgs e)
         {
-            document = null;
+            if (teTitle.Text == "")
+            {
+                XtraMessageBox.Show("Brak tytułu dokumentu");
+                return;
+            }
+            document = new Document();
             document.ClientNumber = comboBoxClient.SelectedIndex + 1;
             document.Name = comboBoxClient.Text;
             document.Title = teTitle.Text;
+            document.CreateDate = DateTime.Now;
             dbContext.Documents.Add(document);
             dbContext.SaveChanges();
             RefreshDGV();
 
 
-            using (DocumentList document = new DocumentList())
+            using (DocumentList doc = new DocumentList())
             {
 
-                document.clientId = comboBoxClient.SelectedIndex + 1;
-                document.clientName = comboBoxClient.Text;
-                document.DocumentTitle = teTitle.Text;
-                document.ShowDialog();
+                var tmp = dbContext.Documents.Local.Last();
+                doc.documentID = tmp.Id;
+                doc.createData = document.CreateDate.ToString();
+                doc.clientId = comboBoxClient.SelectedIndex + 1;
+                doc.clientName = comboBoxClient.Text;
+                doc.DocumentTitle = teTitle.Text;
+                doc.ReadDocument = document;
+                doc.ShowDialog();
             }
         }
 
@@ -65,10 +75,26 @@ namespace ZadanieRekrutacyjneITC.Windows
         {
             if (dataGridViewDocumentList.SelectedRows.Count > 0)
             {
-                var doc = (Document)dataGridViewDocumentList.SelectedRows[0].DataBoundItem;
-                comboBoxClient.SelectedIndex = doc.ClientNumber; 
-                teTitle.Text = doc.Name;
-                document = doc;
+               
+                var selected = (Document)dataGridViewDocumentList.SelectedRows[0].DataBoundItem;
+                //comboBoxClient.SelectedIndex = selected.ClientNumber; 
+                //teTitle.Text = selected.Name;
+                document = selected;
+                if (document.ClientNumber == 0 )
+                {
+                    XtraMessageBox.Show("Krytyczny bład wybrano dokument bez przypisanego klienta!");
+                    return;
+                }
+                using (DocumentList doc = new DocumentList())
+                {
+                    doc.ReadDocument = document;
+                    doc.documentID = document.ClientNumber;
+                    doc.createData = document.CreateDate.ToString();
+                    doc.clientId = document.ClientNumber;
+                    doc.clientName = document.Name;
+                    doc.DocumentTitle = document.Title;
+                    doc.ShowDialog();
+                }
             }
         }
     }
