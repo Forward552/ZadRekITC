@@ -1,13 +1,6 @@
 ﻿using DevExpress.XtraEditors;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZadanieRekrutacyjneITC.Entities;
 
@@ -18,24 +11,20 @@ namespace ZadanieRekrutacyjneITC.Windows
         private DataBaseContext dbContext = new DataBaseContext();
         private Document document = new Document();
 
-
         public CreateDocument()
         {
             InitializeComponent();
         }
-
-       
-
         private void CreateDocument_Load(object sender, EventArgs e)
         {
-            dbContext.Documents.Load();
+            //dbContext.Documents.Load();
             comboBoxClient.DataSource = dbContext.Clients.ToList();
             comboBoxClient.DisplayMember = "Name";
-            RefreshDGV();
-
+            RefreshTable();
+            Logging.Log("Otwarto okno z dokumentami");
         }
 
-        private void RefreshDGV()
+        private void RefreshTable()
         {
             dataGridViewDocumentList.DataSource = dbContext.Documents.ToList();
         }
@@ -54,12 +43,9 @@ namespace ZadanieRekrutacyjneITC.Windows
             document.CreateDate = DateTime.Now;
             dbContext.Documents.Add(document);
             dbContext.SaveChanges();
-            RefreshDGV();
-
-
+            RefreshTable();
             using (DocumentList doc = new DocumentList())
             {
-
                 var tmp = dbContext.Documents.Local.Last();
                 doc.documentID = tmp.Id;
                 doc.createData = document.CreateDate.ToString();
@@ -67,6 +53,7 @@ namespace ZadanieRekrutacyjneITC.Windows
                 doc.clientName = comboBoxClient.Text;
                 doc.DocumentTitle = teTitle.Text;
                 doc.ReadDocument = document;
+                Logging.Log($"Dodano nowy dokument u klienta {doc.clientName}", tmp.Id);
                 doc.ShowDialog();
             }
         }
@@ -75,27 +62,50 @@ namespace ZadanieRekrutacyjneITC.Windows
         {
             if (dataGridViewDocumentList.SelectedRows.Count > 0)
             {
-               
                 var selected = (Document)dataGridViewDocumentList.SelectedRows[0].DataBoundItem;
-                //comboBoxClient.SelectedIndex = selected.ClientNumber; 
-                //teTitle.Text = selected.Name;
                 document = selected;
-                if (document.ClientNumber == 0 )
+            if (document.ClientNumber < 1)
+            {
+                XtraMessageBox.Show("Krytyczny bład wybrano dokument bez przypisanego klienta!");
+                return;
+                //throw new Exception("Wybrano dokument bez przypisanego klienta!");
+            }
+                switch (cbDelete.Checked)
                 {
-                    XtraMessageBox.Show("Krytyczny bład wybrano dokument bez przypisanego klienta!");
-                    return;
-                }
-                using (DocumentList doc = new DocumentList())
-                {
-                    doc.ReadDocument = document;
-                    doc.documentID = document.ClientNumber;
-                    doc.createData = document.CreateDate.ToString();
-                    doc.clientId = document.ClientNumber;
-                    doc.clientName = document.Name;
-                    doc.DocumentTitle = document.Title;
-                    doc.ShowDialog();
+                    case true:
+                        var result = XtraMessageBox.Show($"Czy na pewno chcesz usunąć dokument:{document.Title}", "Kasowanie Dokumentu", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            Logging.Log($"Usunięto dokument Klienta{document.Name}", document.Id);
+                            dbContext.Documents.Remove(document);
+                            dbContext.SaveChanges();
+                            cbDelete.Checked = false;
+                            RefreshTable();
+                        }
+                        break;
+
+                    case false:
+                        using (DocumentList doc = new DocumentList())
+                        {
+                            doc.ReadDocument = document;
+                            doc.documentID = document.Id;
+                            doc.createData = document.CreateDate.ToString();
+                            doc.clientId = document.ClientNumber;
+                            doc.clientName = document.Name;
+                            doc.DocumentTitle = document.Title;
+                            Logging.Log($"Przeglądanie Dokumentu Klienta {document.Name}", document.Id);
+
+                            doc.ShowDialog();
+                        }
+                        break;
                 }
             }
+        }
+
+        private void sbSave_Click(object sender, EventArgs e)
+        {
+            dbContext.SaveChanges();
+            Logging.Log("Edytowano Dokumenty!");
         }
     }
 }

@@ -30,12 +30,9 @@ namespace ZadanieRekrutacyjneITC.Entities
                 eb.Property(d => d.Name).HasColumnType("varchar(100)");
                 eb.Property(d => d.Title).HasMaxLength(100);
                 eb.HasMany(d => d.Items)
-                .WithOne(i =>i.Document)
-                .HasForeignKey(i =>i.DocumentId);
+                .WithOne(i => i.Document)
+                .HasForeignKey(i => i.DocumentId);
             });
-
-
-     
 
             modelBuilder.Entity<Item>(eb =>
             {
@@ -52,10 +49,6 @@ namespace ZadanieRekrutacyjneITC.Entities
                 eb.Property(l => l.Date).HasDefaultValueSql("getutcdate()");
             });
 
-
-
-
         }
-
     }
 }

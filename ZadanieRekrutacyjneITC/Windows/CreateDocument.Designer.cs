@@ -46,6 +46,8 @@
             this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.clientBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.cbDelete = new DevExpress.XtraEditors.CheckButton();
+            this.sbSave = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.teTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDocumentList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentBindingSource)).BeginInit();
@@ -79,7 +81,6 @@
             this.dataGridViewDocumentList.DataSource = this.documentBindingSource;
             this.dataGridViewDocumentList.Location = new System.Drawing.Point(12, 75);
             this.dataGridViewDocumentList.Name = "dataGridViewDocumentList";
-            this.dataGridViewDocumentList.ReadOnly = true;
             this.dataGridViewDocumentList.RowTemplate.Height = 25;
             this.dataGridViewDocumentList.Size = new System.Drawing.Size(744, 198);
             this.dataGridViewDocumentList.TabIndex = 2;
@@ -90,49 +91,42 @@
             this.clientNumberDataGridViewTextBoxColumn.DataPropertyName = "ClientNumber";
             this.clientNumberDataGridViewTextBoxColumn.HeaderText = "ClientNumber";
             this.clientNumberDataGridViewTextBoxColumn.Name = "clientNumberDataGridViewTextBoxColumn";
-            this.clientNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // titleDataGridViewTextBoxColumn
             // 
             this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
             this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
             this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // createDateDataGridViewTextBoxColumn
             // 
             this.createDateDataGridViewTextBoxColumn.DataPropertyName = "CreateDate";
             this.createDateDataGridViewTextBoxColumn.HeaderText = "CreateDate";
             this.createDateDataGridViewTextBoxColumn.Name = "createDateDataGridViewTextBoxColumn";
-            this.createDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // editDateDataGridViewTextBoxColumn
             // 
             this.editDateDataGridViewTextBoxColumn.DataPropertyName = "EditDate";
             this.editDateDataGridViewTextBoxColumn.HeaderText = "EditDate";
             this.editDateDataGridViewTextBoxColumn.Name = "editDateDataGridViewTextBoxColumn";
-            this.editDateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // priceNDataGridViewTextBoxColumn
             // 
             this.priceNDataGridViewTextBoxColumn.DataPropertyName = "PriceN";
             this.priceNDataGridViewTextBoxColumn.HeaderText = "PriceN";
             this.priceNDataGridViewTextBoxColumn.Name = "priceNDataGridViewTextBoxColumn";
-            this.priceNDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // priceBDataGridViewTextBoxColumn
             // 
             this.priceBDataGridViewTextBoxColumn.DataPropertyName = "PriceB";
             this.priceBDataGridViewTextBoxColumn.HeaderText = "PriceB";
             this.priceBDataGridViewTextBoxColumn.Name = "priceBDataGridViewTextBoxColumn";
-            this.priceBDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // documentBindingSource
             // 
@@ -184,11 +178,30 @@
             // 
             this.clientBindingSource1.DataSource = typeof(ZadanieRekrutacyjneITC.Entities.Client);
             // 
+            // cbDelete
+            // 
+            this.cbDelete.Location = new System.Drawing.Point(622, 41);
+            this.cbDelete.Name = "cbDelete";
+            this.cbDelete.Size = new System.Drawing.Size(134, 23);
+            this.cbDelete.TabIndex = 18;
+            this.cbDelete.Text = "Usuń Dokument";
+            // 
+            // sbSave
+            // 
+            this.sbSave.Location = new System.Drawing.Point(482, 12);
+            this.sbSave.Name = "sbSave";
+            this.sbSave.Size = new System.Drawing.Size(134, 23);
+            this.sbSave.TabIndex = 19;
+            this.sbSave.Text = "Zapisz zmiany";
+            this.sbSave.Click += new System.EventHandler(this.sbSave_Click);
+            // 
             // CreateDocument
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 285);
+            this.Controls.Add(this.sbSave);
+            this.Controls.Add(this.cbDelete);
             this.Controls.Add(this.comboBoxClient);
             this.Controls.Add(this.sbAdd);
             this.Controls.Add(this.labelControl2);
@@ -229,5 +242,7 @@
         private System.Windows.Forms.BindingSource clientBindingSource;
         private System.Windows.Forms.BindingSource itemsBindingSource;
         private System.Windows.Forms.BindingSource clientBindingSource1;
+        private DevExpress.XtraEditors.CheckButton cbDelete;
+        private DevExpress.XtraEditors.SimpleButton sbSave;
     }
 }

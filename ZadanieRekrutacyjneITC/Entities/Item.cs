@@ -13,7 +13,6 @@ namespace ZadanieRekrutacyjneITC.Entities
         public decimal Count { get; set; }
         public decimal PriceN { get; set; }
         public decimal PriceB { get; set; }
-
         public Document Document { get; set; }
         public int DocumentId { get; set; }
 

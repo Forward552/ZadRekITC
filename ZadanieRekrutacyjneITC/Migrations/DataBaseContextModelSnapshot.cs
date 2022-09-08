@@ -55,9 +55,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EditDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("varchar(100)");
 

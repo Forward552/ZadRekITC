@@ -12,7 +12,7 @@ using ZadanieRekrutacyjneITC.Entities;
 namespace ZadanieRekrutacyjneITC.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220906093038_Init")]
+    [Migration("20220908174827_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,9 +55,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EditDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")

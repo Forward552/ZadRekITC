@@ -51,6 +51,8 @@
             this.spAdd = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.sbSave = new DevExpress.XtraEditors.SimpleButton();
+            this.sbDelete = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -85,7 +87,6 @@
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             this.gridControl1.DockChanged += new System.EventHandler(this.gridControl1_DockChanged);
-            this.gridControl1.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.gridControl1_ControlAdded);
             // 
             // itemBindingSource
             // 
@@ -231,7 +232,7 @@
             this.spAdd.Name = "spAdd";
             this.spAdd.Size = new System.Drawing.Size(369, 23);
             this.spAdd.TabIndex = 13;
-            this.spAdd.Text = "Dodaj Produkt [Enter]";
+            this.spAdd.Text = "Dodaj Produkt";
             this.spAdd.Click += new System.EventHandler(this.spAdd_Click);
             // 
             // labelControl5
@@ -250,11 +251,31 @@
             this.labelControl6.TabIndex = 14;
             this.labelControl6.Text = "Numer Klienta:";
             // 
+            // sbSave
+            // 
+            this.sbSave.Location = new System.Drawing.Point(583, 171);
+            this.sbSave.Name = "sbSave";
+            this.sbSave.Size = new System.Drawing.Size(364, 23);
+            this.sbSave.TabIndex = 16;
+            this.sbSave.Text = "Zapisz Zmiany";
+            this.sbSave.Click += new System.EventHandler(this.sbSave_Click);
+            // 
+            // sbDelete
+            // 
+            this.sbDelete.Location = new System.Drawing.Point(583, 200);
+            this.sbDelete.Name = "sbDelete";
+            this.sbDelete.Size = new System.Drawing.Size(364, 23);
+            this.sbDelete.TabIndex = 17;
+            this.sbDelete.Text = "Delete";
+            this.sbDelete.Click += new System.EventHandler(this.sbDelete_Click);
+            // 
             // DocumentList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 576);
+            this.Controls.Add(this.sbDelete);
+            this.Controls.Add(this.sbSave);
             this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.labelControl6);
             this.Controls.Add(this.spAdd);
@@ -310,5 +331,7 @@
         private DevExpress.XtraEditors.SimpleButton spAdd;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.SimpleButton sbSave;
+        private DevExpress.XtraEditors.SimpleButton sbDelete;
     }
 }

@@ -1,13 +1,8 @@
 ﻿using DevExpress.XtraEditors;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZadanieRekrutacyjneITC.Entities;
 
@@ -23,38 +18,28 @@ namespace ZadanieRekrutacyjneITC.Windows
         private DataBaseContext dbContext = new DataBaseContext();
         private Item item = new Item();
         public Document ReadDocument;
-
         public DocumentList()
         {
             InitializeComponent();
         }
-
         private void DocumentList_Load(object sender, EventArgs e)
         {
             laTitle.Text = DocumentTitle;
             laNumberClient.Text = clientId.ToString();
             laClientName.Text = clientName.ToString();
             laCreateDate.Text = createData;
-
             dbContext.Items.Load();
             RefreshTable();
+            Logging.Log($"Otwarto okno z listą pozycji w dokumencie ", documentID);
         }
-
         private void RefreshTable()
         {
-            itemBindingSource.DataSource = dbContext.Items.Local.Where(x => x.Document == ReadDocument).ToList();
+            itemBindingSource.DataSource = dbContext.Items.Local.Where(x => x.DocumentId == documentID).ToList();
         }
-
         private void gridControl1_DockChanged(object sender, EventArgs e)
         {
             dbContext.SaveChanges();
         }
-
-        private void gridControl1_ControlAdded(object sender, ControlEventArgs e)
-        {
-
-        }
-
         private void spAdd_Click(object sender, EventArgs e)
         {
             if (teName.Text == "")
@@ -63,7 +48,8 @@ namespace ZadanieRekrutacyjneITC.Windows
                 return;
             }
 
-            item.Document = ReadDocument;
+            //item.Document = null;
+            item.DocumentId = documentID;
             item.Name = teName.Text;
             if (decimal.TryParse(teCount.Text, out decimal count))
             {
@@ -80,12 +66,13 @@ namespace ZadanieRekrutacyjneITC.Windows
                 item.PriceB = priceB;
             }
             else item.PriceB = 0;
+            item.Id = 0;
             dbContext.Items.Add(item);
             dbContext.SaveChanges();
             RefreshTable();
             Clear();
+            Logging.Log($"Dodano Nową pozycje {item.Name} w ilości {item.Count} u klienta: {clientName} w okumencie", documentID);
         }
-
         private void Clear()
         {
             teName.Text = "";
@@ -93,6 +80,25 @@ namespace ZadanieRekrutacyjneITC.Windows
             tePriceNetto.Text = "";
             tePriceBrutto.Text = "";
         }
+        private void sbSave_Click(object sender, EventArgs e)
+        {
+            dbContext.SaveChanges();
+            Logging.Log($"Zapisano zmiany w Dokumenice", documentID);
 
+        }
+
+        private void sbDelete_Click(object sender, EventArgs e)
+        {
+            var result = XtraMessageBox.Show("Czy na pewno chcesz usunąc tego klienta?", "Usuwanie klienta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                item = (Item)itemBindingSource.Current;
+                itemBindingSource.RemoveCurrent();
+                Logging.Log($"Usunięto pozycje: {item.Name}");
+                dbContext.Items.Remove(item);
+                dbContext.SaveChanges();
+                Clear();
+            }
+        }
     }
 }

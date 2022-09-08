@@ -56,7 +56,7 @@
             this.sBAdd.Size = new System.Drawing.Size(158, 23);
             this.sBAdd.TabIndex = 2;
             this.sBAdd.Text = "Dodaj Klienta";
-            this.sBAdd.Click += new System.EventHandler(this.sBOperration_Click);
+            this.sBAdd.Click += new System.EventHandler(this.sBAdd_Click);
             // 
             // TEName
             // 

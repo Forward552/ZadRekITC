@@ -33,7 +33,6 @@ namespace ZadanieRekrutacyjneITC.Migrations
                     Name = table.Column<string>(type: "varchar(100)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EditDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PriceN = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     PriceB = table.Column<decimal>(type: "decimal(11,2)", precision: 11, scale: 2, nullable: false)
                 },
