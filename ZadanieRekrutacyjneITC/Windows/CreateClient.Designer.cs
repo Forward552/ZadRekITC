@@ -62,6 +62,7 @@
             // 
             this.TEName.Location = new System.Drawing.Point(72, 37);
             this.TEName.Name = "TEName";
+            this.TEName.Properties.MaxLength = 100;
             this.TEName.Size = new System.Drawing.Size(270, 20);
             this.TEName.TabIndex = 3;
             // 
@@ -85,6 +86,9 @@
             // 
             this.tENip.Location = new System.Drawing.Point(427, 37);
             this.tENip.Name = "tENip";
+            this.tENip.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.tENip.Properties.MaskSettings.Set("mask", "d");
+            this.tENip.Properties.MaxLength = 10;
             this.tENip.Size = new System.Drawing.Size(270, 20);
             this.tENip.TabIndex = 5;
             // 

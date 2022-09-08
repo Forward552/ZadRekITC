@@ -35,7 +35,6 @@
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceNDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceBDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.documentBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -60,6 +59,7 @@
             // 
             this.teTitle.Location = new System.Drawing.Point(183, 38);
             this.teTitle.Name = "teTitle";
+            this.teTitle.Properties.MaxLength = 49;
             this.teTitle.Size = new System.Drawing.Size(234, 20);
             this.teTitle.TabIndex = 0;
             // 
@@ -75,7 +75,6 @@
             this.nameDataGridViewTextBoxColumn,
             this.titleDataGridViewTextBoxColumn,
             this.createDateDataGridViewTextBoxColumn,
-            this.editDateDataGridViewTextBoxColumn,
             this.priceNDataGridViewTextBoxColumn,
             this.priceBDataGridViewTextBoxColumn});
             this.dataGridViewDocumentList.DataSource = this.documentBindingSource;
@@ -109,12 +108,6 @@
             this.createDateDataGridViewTextBoxColumn.DataPropertyName = "CreateDate";
             this.createDateDataGridViewTextBoxColumn.HeaderText = "CreateDate";
             this.createDateDataGridViewTextBoxColumn.Name = "createDateDataGridViewTextBoxColumn";
-            // 
-            // editDateDataGridViewTextBoxColumn
-            // 
-            this.editDateDataGridViewTextBoxColumn.DataPropertyName = "EditDate";
-            this.editDateDataGridViewTextBoxColumn.HeaderText = "EditDate";
-            this.editDateDataGridViewTextBoxColumn.Name = "editDateDataGridViewTextBoxColumn";
             // 
             // priceNDataGridViewTextBoxColumn
             // 
