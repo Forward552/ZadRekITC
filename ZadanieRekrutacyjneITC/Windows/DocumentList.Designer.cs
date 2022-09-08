@@ -163,7 +163,7 @@
             // 
             this.teName.Location = new System.Drawing.Point(98, 119);
             this.teName.Name = "teName";
-            this.teName.Properties.MaxLength = 99;
+            this.teName.Properties.MaxLength = 49;
             this.teName.Size = new System.Drawing.Size(369, 20);
             this.teName.TabIndex = 5;
             // 
@@ -173,7 +173,7 @@
             this.teCount.Name = "teCount";
             this.teCount.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.teCount.Properties.MaskSettings.Set("mask", "f");
-            this.teCount.Properties.MaxLength = 5;
+            this.teCount.Properties.MaxLength = 7;
             this.teCount.Size = new System.Drawing.Size(369, 20);
             this.teCount.TabIndex = 6;
             // 
@@ -183,7 +183,7 @@
             this.tePriceNetto.Name = "tePriceNetto";
             this.tePriceNetto.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.tePriceNetto.Properties.MaskSettings.Set("mask", "c");
-            this.tePriceNetto.Properties.MaxLength = 5;
+            this.tePriceNetto.Properties.MaxLength = 7;
             this.tePriceNetto.Size = new System.Drawing.Size(364, 20);
             this.tePriceNetto.TabIndex = 7;
             // 
@@ -193,7 +193,7 @@
             this.tePriceBrutto.Name = "tePriceBrutto";
             this.tePriceBrutto.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.tePriceBrutto.Properties.MaskSettings.Set("mask", "c");
-            this.tePriceBrutto.Properties.MaxLength = 6;
+            this.tePriceBrutto.Properties.MaxLength = 8;
             this.tePriceBrutto.Size = new System.Drawing.Size(364, 20);
             this.tePriceBrutto.TabIndex = 8;
             // 
