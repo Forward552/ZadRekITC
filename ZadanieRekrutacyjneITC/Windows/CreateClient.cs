@@ -19,6 +19,7 @@ namespace ZadanieRekrutacyjneITC.Windows
         }
         private void sBAdd_Click(object sender, EventArgs e)
         {
+            client = new Client();
             if (TEName.Text == "")
             {
                 XtraMessageBox.Show("Nazwa nie może być pusta!", "Brak Danych.");
@@ -26,15 +27,14 @@ namespace ZadanieRekrutacyjneITC.Windows
             }
             client.Name = TEName.Text;
             client.Nip = tENip.Text.Trim();
-            using (DataBaseContext db = new DataBaseContext())
-            {
-                db.Clients.Add(client);
-                db.SaveChanges();
-                Logging.Log($"Dodano Nowego Klienta: {client.Name}");
-            }
+
+            dbContext.Clients.Add(client);
+            dbContext.SaveChanges();
+            Logging.Log($"Dodano Nowego Klienta: {client.Name}");
+
             MessageBox.Show($"Dodano klienta: {client.Name}", "Dodano", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            gridControl1.Refresh();
             Clear();
+            RefreshTab();
         }
         private void sbDelete_Click(object sender, EventArgs e)
         {
